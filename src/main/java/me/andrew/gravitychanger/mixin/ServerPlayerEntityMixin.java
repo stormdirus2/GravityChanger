@@ -69,12 +69,7 @@ public abstract class ServerPlayerEntityMixin implements RotatableEntityAccessor
             )
     )
     private void inject_moveToWorld_sendPacket_1(CallbackInfoReturnable<ServerPlayerEntity> cir) {
-        Direction gravityDirection = this.gravitychanger$getGravityDirection();
-        if(gravityDirection != Direction.DOWN && GravityChangerMod.config.resetGravityOnDimensionChange) {
-            this.gravitychanger$setGravityDirection(Direction.DOWN, true);
-        } else {
-            this.gravitychanger$sendGravityPacket(gravityDirection, true);
-        }
+        this.gravitychanger$setGravityDirection(Direction.DOWN, true);
     }
 
     @Inject(
@@ -87,12 +82,7 @@ public abstract class ServerPlayerEntityMixin implements RotatableEntityAccessor
             )
     )
     private void inject_teleport_sendPacket_0(CallbackInfo ci) {
-        Direction gravityDirection = this.gravitychanger$getGravityDirection();
-        if(gravityDirection != Direction.DOWN && GravityChangerMod.config.resetGravityOnDimensionChange) {
-            this.gravitychanger$setGravityDirection(Direction.DOWN, true);
-        } else {
-            this.gravitychanger$sendGravityPacket(gravityDirection, true);
-        }
+        this.gravitychanger$setGravityDirection(Direction.DOWN, true);
     }
 
     @Inject(
@@ -100,10 +90,6 @@ public abstract class ServerPlayerEntityMixin implements RotatableEntityAccessor
             at = @At("TAIL")
     )
     private void inject_copyFrom(ServerPlayerEntity oldPlayer, boolean alive, CallbackInfo ci) {
-        if(GravityChangerMod.config.resetGravityOnRespawn) {
-            ((RotatableEntityAccessor) oldPlayer).gravitychanger$setGravityDirection(Direction.DOWN, true);
-        } else {
-            this.gravitychanger$setGravityDirection(((RotatableEntityAccessor) oldPlayer).gravitychanger$getGravityDirection(), true);
-        }
+        ((RotatableEntityAccessor) oldPlayer).gravitychanger$setGravityDirection(Direction.DOWN, true);
     }
 }

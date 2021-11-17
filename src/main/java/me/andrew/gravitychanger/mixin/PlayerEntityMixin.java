@@ -79,12 +79,10 @@ public abstract class PlayerEntityMixin extends LivingEntity implements EntityAc
             this.setVelocity(RotationUtil.vecWorldToPlayer(RotationUtil.vecPlayerToWorld(this.getVelocity(), prevGravityDirection), gravityDirection));
 
             // Keep world looking direction when changing gravity
-            if(GravityChangerMod.config.keepWorldLook) {
-                Vec2f worldAngles = RotationUtil.rotPlayerToWorld(this.getYaw(), this.getPitch(), prevGravityDirection);
-                Vec2f newViewAngles = RotationUtil.rotWorldToPlayer(worldAngles.x, worldAngles.y, gravityDirection);
-                this.setYaw(newViewAngles.x);
-                this.setPitch(newViewAngles.y);
-            }
+            Vec2f worldAngles = RotationUtil.rotPlayerToWorld(this.getYaw(), this.getPitch(), prevGravityDirection);
+            Vec2f newViewAngles = RotationUtil.rotWorldToPlayer(worldAngles.x, worldAngles.y, gravityDirection);
+            this.setYaw(newViewAngles.x);
+            this.setPitch(newViewAngles.y);
         }
     }
 
@@ -224,7 +222,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements EntityAc
             double e = playerMovement.z;
             double var7 = 0.05D;
 
-            while(d != 0.0D && this.world.isSpaceEmpty(this, this.getBoundingBox().offset(RotationUtil.vecPlayerToWorld(d, (double)(-this.stepHeight), 0.0D, gravityDirection)))) {
+            while(d != 0.0D && this.world.isSpaceEmpty(this, this.getBoundingBox().offset(RotationUtil.vecPlayerToWorld(d, -this.stepHeight, 0.0D, gravityDirection)))) {
                 if (d < 0.05D && d >= -0.05D) {
                     d = 0.0D;
                 } else if (d > 0.0D) {
@@ -234,7 +232,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements EntityAc
                 }
             }
 
-            while(e != 0.0D && this.world.isSpaceEmpty(this, this.getBoundingBox().offset(RotationUtil.vecPlayerToWorld(0.0D, (double)(-this.stepHeight), e, gravityDirection)))) {
+            while(e != 0.0D && this.world.isSpaceEmpty(this, this.getBoundingBox().offset(RotationUtil.vecPlayerToWorld(0.0D, -this.stepHeight, e, gravityDirection)))) {
                 if (e < 0.05D && e >= -0.05D) {
                     e = 0.0D;
                 } else if (e > 0.0D) {
@@ -244,7 +242,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements EntityAc
                 }
             }
 
-            while(d != 0.0D && e != 0.0D && this.world.isSpaceEmpty(this, this.getBoundingBox().offset(RotationUtil.vecPlayerToWorld(d, (double)(-this.stepHeight), e, gravityDirection)))) {
+            while(d != 0.0D && e != 0.0D && this.world.isSpaceEmpty(this, this.getBoundingBox().offset(RotationUtil.vecPlayerToWorld(d, -this.stepHeight, e, gravityDirection)))) {
                 if (d < 0.05D && d >= -0.05D) {
                     d = 0.0D;
                 } else if (d > 0.0D) {

@@ -3,14 +3,15 @@
   "id": "gravitychanger",
   "version": "${version}",
 
-  "name": "GravityChanger",
-  "description": "Lets you change player gravity",
+  "name": "GravityChanger - Minimal",
+  "description": "Lets you change player gravity, minimally.",
   "contact": {
-    "issues": "https://github.com/Gaider10/GravityChanger/issues",
-    "sources": "https://github.com/Gaider10/GravityChanger"
+    "issues": "https://github.com/SciRave/GravityChanger/issues",
+    "sources": "https://github.com/SciRave/GravityChanger"
   },
   "authors": [
-    "Gaider10"
+    "Gaider10",
+    "SciRave"
   ],
   "license": "MIT",
   "icon": "assets/gravitychanger/icon.png",
@@ -22,9 +23,6 @@
     ],
     "client": [
       "me.andrew.gravitychanger.ClientInit"
-    ],
-    "modmenu": [
-      "me.andrew.gravitychanger.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -35,7 +33,6 @@
     "fabricloader": ">=0.11.3",
     "fabric": "*",
     "minecraft": "1.17.x",
-    "java": ">=16",
-    "cloth-config2": "*"
+    "java": ">=16"
   }
 }

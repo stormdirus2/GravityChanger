@@ -77,7 +77,7 @@ public abstract class EntityMixin implements EntityAccessor {
 
     @Shadow public abstract Box getBoundingBox();
 
-    @Shadow public static Vec3d adjustMovementForCollisions(Vec3d movement, Box entityBoundingBox, ReusableStream<VoxelShape> collisions) { return null; };
+    @Shadow public static Vec3d adjustMovementForCollisions(Vec3d movement, Box entityBoundingBox, ReusableStream<VoxelShape> collisions) { return null; }
 
     @Shadow public abstract Vec3d getPos();
 
@@ -183,9 +183,9 @@ public abstract class EntityMixin implements EntityAccessor {
 
         Vec3d vec3d = RotationUtil.vecPlayerToWorld(0.0D, this.standingEyeHeight, 0.0D, gravityDirection);
 
-        double d = MathHelper.lerp((double)tickDelta, this.prevX, this.getX()) + vec3d.x;
-        double e = MathHelper.lerp((double)tickDelta, this.prevY, this.getY()) + vec3d.y;
-        double f = MathHelper.lerp((double)tickDelta, this.prevZ, this.getZ()) + vec3d.z;
+        double d = MathHelper.lerp(tickDelta, this.prevX, this.getX()) + vec3d.x;
+        double e = MathHelper.lerp(tickDelta, this.prevY, this.getY()) + vec3d.y;
+        double f = MathHelper.lerp(tickDelta, this.prevZ, this.getZ()) + vec3d.z;
         cir.setReturnValue(new Vec3d(d, e, f));
     }
 
@@ -654,7 +654,8 @@ public abstract class EntityMixin implements EntityAccessor {
             at = @At("HEAD")
     )
     private void inject_attemptTickInVoid(CallbackInfo ci) {
-        if (GravityChangerMod.config.voidDamageAboveWorld && this.getY() > (double)(this.world.getTopY() + 256)) {
+        Direction gravityDirection = ((EntityAccessor) this).gravitychanger$getAppliedGravityDirection();
+        if (gravityDirection != Direction.DOWN && this.getY() > (double)(this.world.getTopY() + 256)) {
             this.tickInVoid();
         }
     }

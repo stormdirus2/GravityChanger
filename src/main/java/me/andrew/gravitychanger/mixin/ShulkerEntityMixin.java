@@ -23,7 +23,7 @@ public abstract class ShulkerEntityMixin {
     )
     private void redirect_pushEntities_move_0(Entity entity, MovementType movementType, Vec3d vec3d) {
         Direction gravityDirection = ((EntityAccessor) entity).gravitychanger$getAppliedGravityDirection();
-        if(gravityDirection == Direction.DOWN) {
+        if (gravityDirection == Direction.DOWN) {
             entity.move(movementType, vec3d);
             return;
         }
